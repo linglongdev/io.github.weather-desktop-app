@@ -1,0 +1,1 @@
+# io.github.weather-desktop-app
