@@ -1,0 +1,28 @@
+version: "1"
+
+package:
+  id: io.github.weather-desktop-app
+  name: weather-desktop-app
+  version: 0.0.0.1
+  kind: app
+  description: |
+    A desktop weather forecast app using Qt/C++ inspired by windows weather app
+
+command:
+  - /opt/apps/io.github.weather-desktop-app/files/bin/weather
+
+base: org.deepin.foundation/23.0.0
+runtime: org.deepin.Runtime/23.0.1
+
+sources:
+  - kind: git
+    url: https://github.com/zzhezz/qt-weather-desktop-app.git
+    version: master
+    commit: 72a0d0d9742628b589d65579045a0ab1bc610379
+
+build: |
+  cd /project/linglong/sources/qt-weather-desktop-app.git
+  git apply ../../../0001-install.patch
+  qmake -makefile PREFIX=${PREFIX} LIB_INSTALL_DIR=${PREFIX}/lib/${TRIPLET}
+  make -j$(nproc)
+  make install

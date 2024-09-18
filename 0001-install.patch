@@ -1,0 +1,51 @@
+From 145ebe31813f7b7e935d37cd2870e59b28f29e3b Mon Sep 17 00:00:00 2001
+From: wjyrich <1071633242@qq.com>
+Date: Sat, 14 Sep 2024 15:26:35 +0800
+Subject: [PATCH] install
+
+---
+ weather.desktop | 11 +++++++++++
+ weather.pro     | 10 +++++++---
+ 2 files changed, 18 insertions(+), 3 deletions(-)
+ create mode 100644 weather.desktop
+
+diff --git a/weather.desktop b/weather.desktop
+new file mode 100644
+index 0000000..0509deb
+--- /dev/null
++++ b/weather.desktop
+@@ -0,0 +1,11 @@
++[Desktop Entry]
++Categories=Accessibility;Qt;Utility;
++Exec=weather
++Name=weather
++Name[zh_CN]=weather
++Icon=humidity
++StartupNotify=false
++Terminal=false
++Type=Application
++GenericName=weather
++Version=1.0
+diff --git a/weather.pro b/weather.pro
+index 28da02d..4a01545 100644
+--- a/weather.pro
++++ b/weather.pro
+@@ -21,8 +21,12 @@ FORMS += \
+     mainwindow.ui
+ 
+ # Default rules for deployment.
+-qnx: target.path = /tmp/$${TARGET}/bin
+-else: unix:!android: target.path = /opt/$${TARGET}/bin
+-!isEmpty(target.path): INSTALLS += target
++target.path = $$PREFIX/bin
++desktop.files = weather.desktop
++desktop.path = $$PREFIX/share/applications/
++icons.path = $$PREFIX/share/icons/hicolor/apps/
++icons.files = res/humidity.png
++
++INSTALLS += target desktop icons
+ 
+ RESOURCES += main.qrc
+-- 
+2.43.4
+
